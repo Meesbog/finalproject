@@ -1,0 +1,86 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 1030,
+  "height": 450,
+  "background": null,
+  
+
+  "title": "Worldmap of top 6 economies",
+  "projection": {"type": "equalEarth"},
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/JiazhouLiu/FIT3179/main/VegaLite/2_symbol_map/js/ne_110m_admin_0_countries.topojson",
+        "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+      },
+      "mark": [ {"type": "graticule", "stepMinor": [15, 15]}],
+      "mark": {"type": "geoshape", "fill": "lightgrey", "stroke": "grey"}
+    },
+
+      {
+        "data": {
+        "url":
+        "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/7_others/oceans.topojson",
+        "format": {"type": "topojson", "feature": "oceans"}
+        },
+        "mark": {"type": "geoshape", "fill": "skyblue"}
+        },
+
+        {
+          "data": {
+          "url":
+          "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/2_symbol_map/js/WorldMapWithGraticules.topojson",
+       
+          "format": {"type": "topojson", "feature":
+          "ne_110m_graticules_30"}
+          },
+          "mark": {"type": "geoshape", "fill": null, "stroke":
+          "gray"}},
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/Meesbog/project-2/main/Countryplace2.csv"
+      },
+      "layer":[{
+      "mark": {"type": "circle"},
+      "encoding": {
+        "longitude": {"field": "Longitude", "type": "quantitative"},
+        "latitude": {"field": "Latitude", "type": "quantitative"},
+
+      
+        "color": {
+          "field": "Country",
+          "type": "nominal",
+          "title": "Country",
+          "scale": {"scheme": "set1"},
+          "legend": null
+        },
+        "size": {
+          "field": "GDP in billion (current US$)",
+          "type": "quantitative",
+          "title": "GDP in billion (current US$)",
+          "legend": null
+        }
+        }
+      },
+     
+      {
+      "mark": {
+        "type": "text"
+    
+      },
+      "encoding": {
+        "longitude": {"field": "Longitude", "type": "quantitative"},
+        "latitude": {"field": "Latitude", "type": "quantitative"},
+        "text": {"field": "Country", "type": "nominal"},
+        "color": {"value": "black"},
+        "opacity": {
+          "condition": {
+            "test": "datum['Country'] == 'China' || datum['Country'] == 'Germany' || datum['Country'] == 'India' || datum['Country'] == 'Japan' || datum['Country'] == 'United Kingdom' || datum['Country'] == 'United States'"
+            ,
+            "value": 1
+          }},
+          "tooltip": [
+            {"field": "GDP in billion (current US$)", "type": "quantitative"}
+          ]}}]
+          }]
+  }
